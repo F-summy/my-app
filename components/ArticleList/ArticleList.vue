@@ -24,6 +24,7 @@
 		},
 		watch: {
 			labelList(newVal, oldVal) {
+				if (JSON.stringify(newVal) === JSON.stringify(oldVal)) return
 				this.articleListData = {}
 				this.alreadyList = {}
 				this.getArticleList(this.activeIndex)

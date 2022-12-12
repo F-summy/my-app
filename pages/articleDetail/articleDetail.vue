@@ -17,11 +17,12 @@
 					<text>{{articleData.thumbs_up_count}} 赞</text>
 				</view>
 			</view>
-			<button type="default" class="detail-header-button">取消关注</button>
+			<button type="default" class="detail-header-button"
+				@click="followAuthor">{{isFollowAuthor?'取消关注':'关注'}}</button>
 		</view>
 		<view class="detail-content-container">
 			<view class="detail-html">
-				<!-- <u-parse :content="article" /> -->
+				<u-parse :content="article" />
 			</view>
 			<view class="detail-comment">
 				<view class="comment-title">最新评论</view>
@@ -43,7 +44,7 @@
 					<uni-icons type="chat" size="22" color="#f07373"></uni-icons>
 				</view>
 				<view class="detail-bottom-icon-box">
-					<uni-icons type="heart" size="22" color="#f07373"></uni-icons>
+					<SaveLikes :articleId="articleData._id" size="24"></SaveLikes>
 				</view>
 				<view class="detail-bottom-icon-box">
 					<uni-icons type="hand-up" size="24" color="#f07373"></uni-icons>
@@ -119,6 +120,21 @@
 				data.comment.reply_id && (this.replyData.reply_id = data.comment.reply_id)
 				this.isShowPopup = true
 				this.changeState()
+			},
+			async followAuthor() {
+				await this.checkLogin()
+				const {
+					msg,
+					user
+				} = await this.$http.updata_follow_author({
+					authorId: this.articleData.author.id,
+					userId: this.userInfo._id
+				})
+				uni.showToast({
+					title: msg,
+					icon: 'none'
+				})
+				this.upDataUserInfo(user)
 			}
 		},
 		computed: {
@@ -128,6 +144,9 @@
 				} catch (e) {
 					return null
 				}
+			},
+			isFollowAuthor() {
+				return this.userInfo && this.userInfo.author_likes_ids.includes(this.articleData.author.id)
 			}
 		}
 	}

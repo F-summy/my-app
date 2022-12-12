@@ -55,3 +55,9 @@ export const get_comment_list = data => ajax({
 	name: 'get_comment_list',
 	data
 })
+
+//关注作者
+export const updata_follow_author = data => ajax({
+	name: 'updata_follow_author',
+	data
+})

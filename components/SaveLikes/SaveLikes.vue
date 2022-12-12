@@ -8,7 +8,11 @@
 	export default {
 		name: "SaveLikes",
 		props: {
-			articleId: String
+			articleId: String,
+			size: {
+				type: String,
+				default: "20"
+			}
 		},
 		data() {
 			return {}

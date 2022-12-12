@@ -9,7 +9,7 @@
  */-->
 
 <template>
-	
+
 	<!--基础元素-->
 	<div class="wxParse" :class="className" :style="'user-select:' + userSelect">
 		<block v-for="(node, index) of nodes" :key="index" v-if="!loading">
@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import HtmlToJson from './libs/html2json';
-import wxParseTemplate from './components/wxParseTemplate0';
+	import HtmlToJson from './libs/html2json';
+	import wxParseTemplate from './components/wxParseTemplate0';
 
-	
+
 	export default {
 		name: 'wxParse',
 		props: {
@@ -65,7 +65,7 @@ import wxParseTemplate from './components/wxParseTemplate0';
 			},
 			noData: {
 				type: String,
-				default: '<div style="color: red;">数据不能为空</div>'
+				default: ''
 			},
 			startHandler: {
 				type: Function,
@@ -135,8 +135,8 @@ import wxParseTemplate from './components/wxParseTemplate0';
 
 				this.imageUrls = results.imageUrls;
 				// this.nodes = results.nodes;
-				
-				
+
+
 				this.nodes = [];
 				results.nodes.forEach((item) => {
 					setTimeout(() => {
@@ -212,7 +212,7 @@ import wxParseTemplate from './components/wxParseTemplate0';
 			};
 		},
 		watch: {
-			content(){
+			content() {
 				this.setHtml()
 			}
 			// content: {
