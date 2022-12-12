@@ -1,0 +1,1 @@
+<view class="send-code-conatiner"><view data-event-opts="{{[['tap',[['getCode',['$event']]]]]}}" class="text" bindtap="__e">{{''+(state?time+'秒 发送成功':'获取验证码')+''}}</view></view>
