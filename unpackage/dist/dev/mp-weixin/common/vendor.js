@@ -2585,9 +2585,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 112:
-/*!************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-icons/components/uni-icons/icons.js ***!
-  \************************************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-icons/components/uni-icons/icons.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3762,9 +3762,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 120:
-/*!***************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-forms/components/uni-forms/validate.js ***!
-  \***************************************************************************************************************************************/
+/*!*****************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-forms/components/uni-forms/validate.js ***!
+  \*****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4259,9 +4259,9 @@ SchemaValidator;exports.default = _default;
 /***/ }),
 
 /***/ 121:
-/*!************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-forms/components/uni-forms/utils.js ***!
-  \************************************************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-forms/components/uni-forms/utils.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4692,9 +4692,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 15:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/ajax/api/index.js ***!
-  \**************************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api/index.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4710,10 +4710,44 @@ moudle;exports.default = _default;
 
 /***/ }),
 
-/***/ 150:
-/*!**************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/components/gaoyia-parse/libs/html2json.js ***!
-  \**************************************************************************************************************************/
+/***/ 16:
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api sync .js$ ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./index.js": 15,
+	"./interface/home.js": 17
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 16;
+
+/***/ }),
+
+/***/ 169:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/html2json.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4732,8 +4766,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 151));
-var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 152));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 170));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 171));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
  * html2Json 改造来自: https://github.com/Jxck/html2json
  *
  *
@@ -4982,10 +5016,88 @@ html2json;exports.default = _default;
 
 /***/ }),
 
-/***/ 151:
-/*!**************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/components/gaoyia-parse/libs/wxDiscode.js ***!
-  \**************************************************************************************************************************/
+/***/ 17:
+/*!*************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api/interface/home.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.updata_label_list = exports.updata_follow_author = exports.thumbs_up_article = exports.save_like_article = exports.get_userInfo = exports.get_search_list = exports.get_label_list = exports.get_comment_list = exports.get_comment_content = exports.get_code_num = exports.get_article_list = exports.get_article_detail = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../../http.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+//选项卡
+var get_label_list = function get_label_list(data) {return (0, _http.default)({
+    name: 'get_label_list',
+    data: data });};
+
+//文章列表
+exports.get_label_list = get_label_list;var get_article_list = function get_article_list(data) {return (0, _http.default)({
+    name: 'get_article_list',
+    data: data });};
+
+//用户登录
+exports.get_article_list = get_article_list;var get_userInfo = function get_userInfo(data) {return (0, _http.default)({
+    name: 'get_userInfo',
+    data: data });};
+
+//获取验证码
+exports.get_userInfo = get_userInfo;var get_code_num = function get_code_num(data) {return (0, _http.default)({
+    name: 'get_code',
+    data: data });};
+
+
+//用户收藏
+exports.get_code_num = get_code_num;
+var save_like_article = function save_like_article(data) {return (0, _http.default)({
+    name: 'save_like_article',
+    data: data });};
+
+
+//搜索内容
+exports.save_like_article = save_like_article;var get_search_list = function get_search_list(data) {return (0, _http.default)({
+    name: 'get_search_list',
+    data: data });};
+
+
+//标签管理
+exports.get_search_list = get_search_list;var updata_label_list = function updata_label_list(data) {return (0, _http.default)({
+    name: 'updata_label_list',
+    data: data });};
+
+
+//文章详情
+exports.updata_label_list = updata_label_list;var get_article_detail = function get_article_detail(data) {return (0, _http.default)({
+    name: 'get_article_detail',
+    data: data });};
+
+
+//发文章评论
+exports.get_article_detail = get_article_detail;var get_comment_content = function get_comment_content(data) {return (0, _http.default)({
+    name: 'get_comment_content',
+    data: data });};
+
+//获取文章评论
+exports.get_comment_content = get_comment_content;var get_comment_list = function get_comment_list(data) {return (0, _http.default)({
+    name: 'get_comment_list',
+    data: data });};
+
+
+//关注作者
+exports.get_comment_list = get_comment_list;var updata_follow_author = function updata_follow_author(data) {return (0, _http.default)({
+    name: 'updata_follow_author',
+    data: data });};
+
+//文章点赞
+exports.updata_follow_author = updata_follow_author;var thumbs_up_article = function thumbs_up_article(data) {return (0, _http.default)({
+    name: 'thumbs_up_article',
+    data: data });};exports.thumbs_up_article = thumbs_up_article;
+
+/***/ }),
+
+/***/ 170:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/wxDiscode.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5201,10 +5313,10 @@ function urlToHttpUrl(url, domain) {
 
 /***/ }),
 
-/***/ 152:
-/*!***************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/components/gaoyia-parse/libs/htmlparser.js ***!
-  \***************************************************************************************************************************/
+/***/ 171:
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/htmlparser.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5368,151 +5480,10 @@ HTMLParser;exports.default = _default;
 
 /***/ }),
 
-/***/ 16:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/ajax/api sync .js$ ***!
-  \***************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./index.js": 15,
-	"./interface/home.js": 17
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 16;
-
-/***/ }),
-
-/***/ 165:
-/*!*************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \*************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 166));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 167));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 168));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
-{
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default };exports.default = _default;
-
-/***/ }),
-
-/***/ 166:
-/*!************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
-
-/***/ }),
-
-/***/ 167:
-/*!*****************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \*****************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
-
-/***/ }),
-
-/***/ 168:
-/*!*****************************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \*****************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
-
-/***/ }),
-
-/***/ 17:
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/ajax/api/interface/home.js ***!
-  \***********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.updata_label_list = exports.save_like_article = exports.get_userInfo = exports.get_search_list = exports.get_label_list = exports.get_code_num = exports.get_article_list = exports.get_article_detail = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../../http.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-//选项卡
-var get_label_list = function get_label_list(data) {return (0, _http.default)({
-    name: 'get_label_list',
-    data: data });};
-
-//文章列表
-exports.get_label_list = get_label_list;var get_article_list = function get_article_list(data) {return (0, _http.default)({
-    name: 'get_article_list',
-    data: data });};
-
-//用户登录
-exports.get_article_list = get_article_list;var get_userInfo = function get_userInfo(data) {return (0, _http.default)({
-    name: 'get_userInfo',
-    data: data });};
-
-//获取验证码
-exports.get_userInfo = get_userInfo;var get_code_num = function get_code_num(data) {return (0, _http.default)({
-    name: 'get_code',
-    data: data });};
-
-
-//用户收藏
-exports.get_code_num = get_code_num;
-var save_like_article = function save_like_article(data) {return (0, _http.default)({
-    name: 'save_like_article',
-    data: data });};
-
-
-//搜索内容
-exports.save_like_article = save_like_article;var get_search_list = function get_search_list(data) {return (0, _http.default)({
-    name: 'get_search_list',
-    data: data });};
-
-
-//标签管理
-exports.get_search_list = get_search_list;var updata_label_list = function updata_label_list(data) {return (0, _http.default)({
-    name: 'updata_label_list',
-    data: data });};
-
-
-//文章详情
-exports.updata_label_list = updata_label_list;var get_article_detail = function get_article_detail(data) {return (0, _http.default)({
-    name: 'get_article_detail',
-    data: data });};exports.get_article_detail = get_article_detail;
-
-/***/ }),
-
 /***/ 18:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/ajax/http.js ***!
-  \*********************************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/http.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5553,10 +5524,61 @@ exports.updata_label_list = updata_label_list;var get_article_detail = function 
 
 /***/ }),
 
+/***/ 184:
+/*!***************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 185));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 186));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 187));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default };exports.default = _default;
+
+/***/ }),
+
+/***/ 185:
+/*!**************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \**************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
+
+/***/ }),
+
+/***/ 186:
+/*!*******************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \*******************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
+
+/***/ }),
+
+/***/ 187:
+/*!*******************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \*******************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
+
+/***/ }),
+
 /***/ 19:
-/*!******************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/common/commonLogin/commonLogin.js ***!
-  \******************************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/common/commonLogin/commonLogin.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5588,6 +5610,217 @@ exports.updata_label_list = updata_label_list;var get_article_detail = function 
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 195:
+/*!******************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-dateformat/components/uni-dateformat/date-format.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.formatDate = formatDate;exports.friendlyDate = friendlyDate; // yyyy-MM-dd hh:mm:ss.SSS 所有支持的类型
+function pad(str) {var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  str += '';
+  while (str.length < length) {
+    str = '0' + str;
+  }
+  return str.slice(-length);
+}
+
+var parser = {
+  yyyy: function yyyy(dateObj) {
+    return pad(dateObj.year, 4);
+  },
+  yy: function yy(dateObj) {
+    return pad(dateObj.year);
+  },
+  MM: function MM(dateObj) {
+    return pad(dateObj.month);
+  },
+  M: function M(dateObj) {
+    return dateObj.month;
+  },
+  dd: function dd(dateObj) {
+    return pad(dateObj.day);
+  },
+  d: function d(dateObj) {
+    return dateObj.day;
+  },
+  hh: function hh(dateObj) {
+    return pad(dateObj.hour);
+  },
+  h: function h(dateObj) {
+    return dateObj.hour;
+  },
+  mm: function mm(dateObj) {
+    return pad(dateObj.minute);
+  },
+  m: function m(dateObj) {
+    return dateObj.minute;
+  },
+  ss: function ss(dateObj) {
+    return pad(dateObj.second);
+  },
+  s: function s(dateObj) {
+    return dateObj.second;
+  },
+  SSS: function SSS(dateObj) {
+    return pad(dateObj.millisecond, 3);
+  },
+  S: function S(dateObj) {
+    return dateObj.millisecond;
+  } };
+
+
+// 这都n年了iOS依然不认识2020-12-12，需要转换为2020/12/12
+function getDate(time) {
+  if (time instanceof Date) {
+    return time;
+  }
+  switch (typeof time) {
+    case 'string':
+      {
+        // 2020-12-12T12:12:12.000Z、2020-12-12T12:12:12.000
+        if (time.indexOf('T') > -1) {
+          return new Date(time);
+        }
+        return new Date(time.replace(/-/g, '/'));
+      }
+    default:
+      return new Date(time);}
+
+}
+
+function formatDate(date) {var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy/MM/dd hh:mm:ss';
+  if (!date && date !== 0) {
+    return '';
+  }
+  date = getDate(date);
+  var dateObj = {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    second: date.getSeconds(),
+    millisecond: date.getMilliseconds() };
+
+  var tokenRegExp = /yyyy|yy|MM|M|dd|d|hh|h|mm|m|ss|s|SSS|SS|S/;
+  var flag = true;
+  var result = format;
+  while (flag) {
+    flag = false;
+    result = result.replace(tokenRegExp, function (matched) {
+      flag = true;
+      return parser[matched](dateObj);
+    });
+  }
+  return result;
+}
+
+function friendlyDate(time, _ref)
+
+
+
+{var _ref$locale = _ref.locale,locale = _ref$locale === void 0 ? 'zh' : _ref$locale,_ref$threshold = _ref.threshold,threshold = _ref$threshold === void 0 ? [60000, 3600000] : _ref$threshold,_ref$format = _ref.format,format = _ref$format === void 0 ? 'yyyy/MM/dd hh:mm:ss' : _ref$format;
+  if (time === '-') {
+    return time;
+  }
+  if (!time && time !== 0) {
+    return '';
+  }
+  var localeText = {
+    zh: {
+      year: '年',
+      month: '月',
+      day: '天',
+      hour: '小时',
+      minute: '分钟',
+      second: '秒',
+      ago: '前',
+      later: '后',
+      justNow: '刚刚',
+      soon: '马上',
+      template: '{num}{unit}{suffix}' },
+
+    en: {
+      year: 'year',
+      month: 'month',
+      day: 'day',
+      hour: 'hour',
+      minute: 'minute',
+      second: 'second',
+      ago: 'ago',
+      later: 'later',
+      justNow: 'just now',
+      soon: 'soon',
+      template: '{num} {unit} {suffix}' } };
+
+
+  var text = localeText[locale] || localeText.zh;
+  var date = getDate(time);
+  var ms = date.getTime() - Date.now();
+  var absMs = Math.abs(ms);
+  if (absMs < threshold[0]) {
+    return ms < 0 ? text.justNow : text.soon;
+  }
+  if (absMs >= threshold[1]) {
+    return formatDate(date, format);
+  }
+  var num;
+  var unit;
+  var suffix = text.later;
+  if (ms < 0) {
+    suffix = text.ago;
+    ms = -ms;
+  }
+  var seconds = Math.floor(ms / 1000);
+  var minutes = Math.floor(seconds / 60);
+  var hours = Math.floor(minutes / 60);
+  var days = Math.floor(hours / 24);
+  var months = Math.floor(days / 30);
+  var years = Math.floor(months / 12);
+  switch (true) {
+    case years > 0:
+      num = years;
+      unit = text.year;
+      break;
+    case months > 0:
+      num = months;
+      unit = text.month;
+      break;
+    case days > 0:
+      num = days;
+      unit = text.day;
+      break;
+    case hours > 0:
+      num = hours;
+      unit = text.hour;
+      break;
+    case minutes > 0:
+      num = minutes;
+      unit = text.minute;
+      break;
+    default:
+      num = seconds;
+      unit = text.second;
+      break;}
+
+
+  if (locale === 'en') {
+    if (num === 1) {
+      num = 'a';
+    } else {
+      unit += 's';
+    }
+  }
+
+  return text.template.replace(/{\s*num\s*}/g, num + '').replace(/{\s*unit\s*}/g, unit).replace(/{\s*suffix\s*}/g,
+  suffix);
+}
 
 /***/ }),
 
@@ -6880,9 +7113,9 @@ module.exports = index_cjs;
 /***/ }),
 
 /***/ 21:
-/*!************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/common/userInfo/userInfo.js ***!
-  \************************************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/common/userInfo/userInfo.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6984,10 +7217,150 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
+/***/ 213:
+/*!**********************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.createAnimation = createAnimation;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);enumerableOnly && (symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;})), keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = null != arguments[i] ? arguments[i] : {};i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {_defineProperty(target, key, source[key]);}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);Object.defineProperty(Constructor, "prototype", { writable: false });return Constructor;} // const defaultOption = {
+// 	duration: 300,
+// 	timingFunction: 'linear',
+// 	delay: 0,
+// 	transformOrigin: '50% 50% 0'
+// }
+var
+
+
+MPAnimation = /*#__PURE__*/function () {
+  function MPAnimation(options, _this) {_classCallCheck(this, MPAnimation);
+    this.options = options;
+    this.animation = uni.createAnimation(options);
+    this.currentStepAnimates = {};
+    this.next = 0;
+    this.$ = _this;
+
+  }_createClass(MPAnimation, [{ key: "_nvuePushAnimates", value:
+
+    function _nvuePushAnimates(type, args) {
+      var aniObj = this.currentStepAnimates[this.next];
+      var styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {} };
+
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = '';
+        }
+        var unit = '';
+        if (type === 'rotate') {
+          unit = 'deg';
+        }
+        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
+      } else {
+        styles.styles[type] = "".concat(args);
+      }
+      this.currentStepAnimates[this.next] = styles;
+    } }, { key: "_animateRun", value:
+    function _animateRun() {var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var ref = this.$.$refs['ani'].ref;
+      if (!ref) return;
+      return new Promise(function (resolve, reject) {
+        nvueAnimation.transition(ref, _objectSpread({
+          styles: styles },
+        config),
+        function (res) {
+          resolve();
+        });
+      });
+    } }, { key: "_nvueNextAnimate", value:
+
+    function _nvueNextAnimate(animates) {var _this2 = this;var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;var fn = arguments.length > 2 ? arguments[2] : undefined;
+      var obj = animates[step];
+      if (obj) {
+        var
+        styles =
+
+        obj.styles,config = obj.config;
+        this._animateRun(styles, config).then(function () {
+          step += 1;
+          _this2._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === 'function' && fn();
+        this.isEnd = true;
+      }
+    } }, { key: "step", value:
+
+    function step() {var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      this.animation.step(config);
+
+
+
+
+
+
+      return this;
+    } }, { key: "run", value:
+
+    function run(fn) {
+
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(function () {
+        typeof fn === 'function' && fn();
+      }, this.$.durationTime);
+
+
+
+
+
+
+
+
+    } }]);return MPAnimation;}();
+
+
+
+var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d',
+'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY',
+'translateZ'];
+
+var animateTypes2 = ['opacity', 'backgroundColor'];
+var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
+animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
+  MPAnimation.prototype[type] = function () {var _this$animation;
+
+    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
+
+
+
+
+    return this;
+  };
+});
+
+function createAnimation(option, _this) {
+  if (!_this) return;
+  clearTimeout(_this.timer);
+  return new MPAnimation(option, _this);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 22:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/store/index.js ***!
-  \***********************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/index.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7008,9 +7381,9 @@ new _vuex.default.Store({
 /***/ }),
 
 /***/ 23:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/store/state.js ***!
-  \***********************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/state.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7024,9 +7397,9 @@ new _vuex.default.Store({
 /***/ }),
 
 /***/ 24:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/store/mutations.js ***!
-  \***************************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/mutations.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7057,9 +7430,9 @@ new _vuex.default.Store({
 /***/ }),
 
 /***/ 25:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/store/actions.js ***!
-  \*************************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/actions.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13614,9 +13987,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 5:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/pages.json ***!
-  \*******************************************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/pages.json ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -13652,21 +14025,21 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 7:
-/*!************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/pages.json?{"type":"origin-pages-json"} ***!
-  \************************************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/pages.json?{"type":"origin-pages-json"} ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/index/index", "style": { "navigationStyle": "custom" } }, { "path": "pages/follow/follow", "style": { "navigationBarTitleText": "我的关注", "enablePullDownRefresh": false } }, { "path": "pages/self/self", "style": { "navigationBarTitleText": "关于我", "enablePullDownRefresh": false } }, { "path": "pages/search/search", "style": { "navigationStyle": "custom" } }, { "path": "pages/setting/setting", "style": { "navigationBarTitleText": "标签管理", "enablePullDownRefresh": false } }, { "path": "pages/login/login", "style": { "navigationBarTitleText": "注册登录", "enablePullDownRefresh": false } }, { "path": "pages/articleDetail/articleDetail", "style": { "navigationBarTitleText": "文章详情页", "enablePullDownRefresh": false } }], "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#f25037", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f25037", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/index/index", "iconPath": "static/img/home.png", "selectedIconPath": "static/img/home-active.png", "text": "首页" }, { "pagePath": "pages/follow/follow", "iconPath": "static/img/follow.png", "selectedIconPath": "static/img/follow-active.png", "text": "关注" }, { "pagePath": "pages/self/self", "iconPath": "static/img/my.png", "selectedIconPath": "static/img/my-active.png", "text": "我的" }] } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/index/index", "style": { "navigationStyle": "custom" } }, { "path": "pages/follow/follow", "style": { "navigationBarTitleText": "我的关注", "enablePullDownRefresh": false } }, { "path": "pages/self/self", "style": { "navigationBarTitleText": "关于我", "enablePullDownRefresh": false } }, { "path": "pages/search/search", "style": { "navigationStyle": "custom" } }, { "path": "pages/setting/setting", "style": { "navigationBarTitleText": "标签管理", "enablePullDownRefresh": false } }, { "path": "pages/login/login", "style": { "navigationBarTitleText": "注册登录", "enablePullDownRefresh": false } }, { "path": "pages/articleDetail/articleDetail", "style": { "navigationBarTitleText": "文章详情页", "enablePullDownRefresh": false } }, { "path": "pages/comments/comments", "style": { "navigationBarTitleText": "评论列表", "enablePullDownRefresh": false } }], "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#f25037", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f25037", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/index/index", "iconPath": "static/img/home.png", "selectedIconPath": "static/img/home-active.png", "text": "首页" }, { "pagePath": "pages/follow/follow", "iconPath": "static/img/follow.png", "selectedIconPath": "static/img/follow-active.png", "text": "关注" }, { "pagePath": "pages/self/self", "iconPath": "static/img/my.png", "selectedIconPath": "static/img/my-active.png", "text": "我的" }] } };exports.default = _default;
 
 /***/ }),
 
 /***/ 76:
-/*!******************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/node_modules/marked/lib/marked.js ***!
-  \******************************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/node_modules/marked/lib/marked.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16432,9 +16805,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 8:
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Documents/HBuilderProjects/my_app/pages.json?{"type":"stat"} ***!
-  \***********************************************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/pages.json?{"type":"stat"} ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

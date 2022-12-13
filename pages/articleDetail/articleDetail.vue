@@ -40,14 +40,14 @@
 				<uni-icons type="compose" size="16" color="#f07373"></uni-icons>
 			</view>
 			<view class="detail-bottom-icons">
-				<view class="detail-bottom-icon-box">
+				<view class="detail-bottom-icon-box" @click="goComments">
 					<uni-icons type="chat" size="22" color="#f07373"></uni-icons>
 				</view>
 				<view class="detail-bottom-icon-box">
 					<SaveLikes :articleId="articleData._id" size="24"></SaveLikes>
 				</view>
-				<view class="detail-bottom-icon-box">
-					<uni-icons type="hand-up" size="24" color="#f07373"></uni-icons>
+				<view class="detail-bottom-icon-box" @click="thumbsUpArticle">
+					<uni-icons :type="!isThumbsUp?'hand-up':'hand-up-filled'" size="24" color="#f07373"></uni-icons>
 				</view>
 			</view>
 		</view>
@@ -135,6 +135,29 @@
 					icon: 'none'
 				})
 				this.upDataUserInfo(user)
+			},
+			async thumbsUpArticle() {
+				await this.checkLogin()
+				const {
+					msg,
+					user,
+					count
+				} = await this.$http.thumbs_up_article({
+					userId: this.userInfo._id,
+					articleId: this.articleData._id
+				})
+				this.articleData.thumbs_up_count = count;
+				uni.showToast({
+					title: msg,
+					icon: 'none'
+				})
+				this.upDataUserInfo(user)
+			},
+			goComments() {
+				const params = this.articleData._id
+				uni.navigateTo({
+					url: `/pages/comments/comments?id=${params}`,
+				});
 			}
 		},
 		computed: {
@@ -146,7 +169,18 @@
 				}
 			},
 			isFollowAuthor() {
-				return this.userInfo && this.userInfo.author_likes_ids.includes(this.articleData.author.id)
+				try {
+					return this.userInfo && this.userInfo.author_likes_ids.includes(this.articleData.author.id)
+				} catch (e) {
+					return false
+				}
+			},
+			isThumbsUp() {
+				try {
+					return this.userInfo && this.userInfo.thumbs_up_article_ids.includes(this.articleData._id)
+				} catch (e) {
+					return false
+				}
 			}
 		}
 	}

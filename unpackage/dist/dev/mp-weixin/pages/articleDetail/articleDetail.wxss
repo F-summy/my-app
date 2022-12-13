@@ -91,6 +91,26 @@
 .detail-content-container .detail-html {
   padding: 0 30rpx;
 }
+.detail-content-container .detail-comment {
+  margin-top: 60rpx;
+}
+.detail-content-container .detail-comment .comment-title {
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  border-bottom: 1px solid #ddd;
+}
+.detail-content-container .detail-comment .comment-content-container {
+  padding: 0 30rpx;
+  border-bottom: 1px solid #eee;
+}
+.detail-content-container .detail-comment .no-data {
+  width: 100%;
+  text-align: center;
+  padding: 30rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
 .detail-bottom {
   position: fixed;
   bottom: 0;

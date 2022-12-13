@@ -6,7 +6,8 @@
     "pages/search/search",
     "pages/setting/setting",
     "pages/login/login",
-    "pages/articleDetail/articleDetail"
+    "pages/articleDetail/articleDetail",
+    "pages/comments/comments"
   ],
   "subPackages": [],
   "window": {

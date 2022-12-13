@@ -61,3 +61,8 @@ export const updata_follow_author = data => ajax({
 	name: 'updata_follow_author',
 	data
 })
+//文章点赞
+export const thumbs_up_article = data => ajax({
+	name: 'thumbs_up_article',
+	data
+})
