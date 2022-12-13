@@ -66,3 +66,8 @@ export const thumbs_up_article = data => ajax({
 	name: 'thumbs_up_article',
 	data
 })
+//关注文章
+export const get_follow_article = data => ajax({
+	name: 'get_follow_article',
+	data
+})

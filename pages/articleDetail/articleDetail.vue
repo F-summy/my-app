@@ -63,8 +63,8 @@
 		components: {
 			uParse
 		},
-		onLoad(options) {
-			this.articleData = (JSON.parse(options.params));
+		onLoad() {
+			this.articleData = this.$Router.currentRoute.query.params;
 			this.getArticleDetail()
 			this.getCommentList()
 		},
