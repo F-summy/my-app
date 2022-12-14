@@ -28,7 +28,7 @@
 					userId: this.userInfo._id,
 					articleId: this.articleId
 				})
-
+				uni.$emit('updataFollow')
 				uni.showToast({
 					title: msg,
 					icon: 'none'

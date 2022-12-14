@@ -92,8 +92,10 @@
 					create_time,
 					browse_count
 				}
-				uni.navigateTo({
-					url: `/pages/articleDetail/articleDetail?params=${JSON.stringify(params)}`
+
+				this.$Router.push({
+					path: '/pages/articleDetail/articleDetail',
+					query: params
 				})
 				this.$emit('saveHistory')
 			}

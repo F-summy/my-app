@@ -64,7 +64,7 @@
 			uParse
 		},
 		onLoad() {
-			this.articleData = this.$Router.currentRoute.query.params;
+			this.articleData = this.$Router.currentRoute.query;
 			this.getArticleDetail()
 			this.getCommentList()
 		},
@@ -134,6 +134,7 @@
 					title: msg,
 					icon: 'none'
 				})
+				uni.$emit('updataAuthor')
 				this.upDataUserInfo(user)
 			},
 			async thumbsUpArticle() {
