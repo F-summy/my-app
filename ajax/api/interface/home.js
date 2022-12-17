@@ -77,3 +77,19 @@ export const get_follow_author = data => ajax({
 	name: 'get_follow_author',
 	data
 })
+
+//关注作者的文章
+export const get_my_article = data => ajax({
+	name: 'get_my_article',
+	data
+})
+//意见反馈
+export const get_update_path = data => ajax({
+	name: 'get_update_path',
+	data
+})
+//更改用户头像
+export const update_user_avatar = data => ajax({
+	name: 'update_user_avatar',
+	data
+})

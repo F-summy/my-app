@@ -1,7 +1,7 @@
 <template>
 	<view class="home-container">
 		<NavBar></NavBar>
-		<Tabbar :labelList="labelList" @setActiveIndex="setActiveIndex" :activeIndex="activeIndex"></Tabbar>
+		<Tabbar :labelList="labelList||[]" @setActiveIndex="setActiveIndex" :activeIndex="activeIndex"></Tabbar>
 		<ArticleList @setCurrentPages="setActiveIndex" class="article-list" :labelList="labelList"
 			:activeIndex="activeIndex"></ArticleList>
 	</view>
@@ -32,7 +32,6 @@
 					name: "全部",
 					_id: "full"
 				}, ...data])
-
 			},
 			setActiveIndex(index) {
 				this.activeIndex = index;

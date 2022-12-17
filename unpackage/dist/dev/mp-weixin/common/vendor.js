@@ -1598,7 +1598,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2584,7 +2584,136 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 122:
+/***/ 14:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ 149:
 /*!**************************************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \**************************************************************************************************************************/
@@ -3761,7 +3890,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 130:
+/***/ 15:
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api/index.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var requireApi = __webpack_require__(16);
+var moudle = {};
+requireApi.keys().forEach(function (key, index) {
+  if (key == "./index.js") return;
+  Object.assign(moudle, requireApi(key));
+});var _default =
+
+moudle;exports.default = _default;
+
+/***/ }),
+
+/***/ 157:
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \*****************************************************************************************************************************/
@@ -4258,7 +4406,7 @@ SchemaValidator;exports.default = _default;
 
 /***/ }),
 
-/***/ 131:
+/***/ 158:
 /*!**************************************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \**************************************************************************************************************************/
@@ -4562,154 +4710,6 @@ var isEqual = function isEqual(a, b) {
 
 /***/ }),
 
-/***/ 14:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 15:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api/index.js ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var requireApi = __webpack_require__(16);
-var moudle = {};
-requireApi.keys().forEach(function (key, index) {
-  if (key == "./index.js") return;
-  Object.assign(moudle, requireApi(key));
-});var _default =
-
-moudle;exports.default = _default;
-
-/***/ }),
-
 /***/ 16:
 /*!*****************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/ajax/api sync .js$ ***!
@@ -4752,7 +4752,7 @@ webpackContext.id = 16;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.updata_label_list = exports.updata_follow_author = exports.thumbs_up_article = exports.save_like_article = exports.get_userInfo = exports.get_search_list = exports.get_label_list = exports.get_follow_article = exports.get_comment_list = exports.get_comment_content = exports.get_code_num = exports.get_article_list = exports.get_article_detail = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../../http.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.update_user_avatar = exports.updata_label_list = exports.updata_follow_author = exports.thumbs_up_article = exports.save_like_article = exports.get_userInfo = exports.get_update_path = exports.get_search_list = exports.get_my_article = exports.get_label_list = exports.get_follow_author = exports.get_follow_article = exports.get_comment_list = exports.get_comment_content = exports.get_code_num = exports.get_article_list = exports.get_article_detail = void 0;var _http = _interopRequireDefault(__webpack_require__(/*! ../../http.js */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 //选项卡
 var get_label_list = function get_label_list(data) {return (0, _http.default)({
     name: 'get_label_list',
@@ -4823,279 +4823,29 @@ exports.updata_follow_author = updata_follow_author;var thumbs_up_article = func
 //关注文章
 exports.thumbs_up_article = thumbs_up_article;var get_follow_article = function get_follow_article(data) {return (0, _http.default)({
     name: 'get_follow_article',
-    data: data });};exports.get_follow_article = get_follow_article;
-
-/***/ }),
-
-/***/ 179:
-/*!****************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/html2json.js ***!
-  \****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+    data: data });};
 
 
+//关注作者
+exports.get_follow_article = get_follow_article;var get_follow_author = function get_follow_author(data) {return (0, _http.default)({
+    name: 'get_follow_author',
+    data: data });};
 
 
+//关注作者的文章
+exports.get_follow_author = get_follow_author;var get_my_article = function get_my_article(data) {return (0, _http.default)({
+    name: 'get_my_article',
+    data: data });};
 
+//意见反馈
+exports.get_my_article = get_my_article;var get_update_path = function get_update_path(data) {return (0, _http.default)({
+    name: 'get_update_path',
+    data: data });};
 
-
-
-
-
-
-
-
-var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 180));
-var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 181));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
- * html2Json 改造来自: https://github.com/Jxck/html2json
- *
- *
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *               垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */function makeMap(str) {var obj = {};var items = str.split(',');for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}return obj;} // Block Elements - HTML 5
-var block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video'); // Inline Elements - HTML 5
-var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
-// Elements that you can, intentionally, leave open
-// (and which close themselves)
-var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
-
-function removeDOCTYPE(html) {
-  var isDocument = /<body.*>([^]*)<\/body>/.test(html);
-  return isDocument ? RegExp.$1 : html;
-}
-
-function trimHtml(html) {
-  return html.
-  replace(/<!--.*?-->/gi, '').
-  replace(/\/\*.*?\*\//gi, '').
-  replace(/[ ]+</gi, '<').
-  replace(/<script[^]*<\/script>/gi, '').
-  replace(/<style[^]*<\/style>/gi, '');
-}
-
-function getScreenInfo() {
-  var screen = {};
-  wx.getSystemInfo({
-    success: function success(res) {
-      screen.width = res.windowWidth;
-      screen.height = res.windowHeight;
-    } });
-
-  return screen;
-}
-
-function html2json(html, customHandler, imageProp, host) {
-  // 处理字符串
-  html = removeDOCTYPE(html);
-  html = trimHtml(html);
-  html = _wxDiscode.default.strDiscode(html);
-  // 生成node节点
-  var bufArray = [];
-  var results = {
-    nodes: [],
-    imageUrls: [] };
-
-
-  var screen = getScreenInfo();
-  function Node(tag) {
-    this.node = 'element';
-    this.tag = tag;
-
-    this.$screen = screen;
-  }
-
-  (0, _htmlparser.default)(html, {
-    start: function start(tag, attrs, unary) {
-      // node for this element
-      var node = new Node(tag);
-
-      if (bufArray.length !== 0) {
-        var parent = bufArray[0];
-        if (parent.nodes === undefined) {
-          parent.nodes = [];
-        }
-      }
-
-      if (block[tag]) {
-        node.tagType = 'block';
-      } else if (inline[tag]) {
-        node.tagType = 'inline';
-      } else if (closeSelf[tag]) {
-        node.tagType = 'closeSelf';
-      }
-
-      node.attr = attrs.reduce(function (pre, attr) {
-        var name = attr.name;
-        var value = attr.value;
-        if (name === 'class') {
-          node.classStr = value;
-        }
-        // has multi attibutes
-        // make it array of attribute
-        if (name === 'style') {
-          node.styleStr = value;
-        }
-        if (value.match(/ /)) {
-          value = value.split(' ');
-        }
-
-        // if attr already exists
-        // merge it
-        if (pre[name]) {
-          if (Array.isArray(pre[name])) {
-            // already array, push to last
-            pre[name].push(value);
-          } else {
-            // single value, make it array
-            pre[name] = [pre[name], value];
-          }
-        } else {
-          // not exist, put it
-          pre[name] = value;
-        }
-
-        return pre;
-      }, {});
-
-      // 优化样式相关属性
-      if (node.classStr) {
-        node.classStr += " ".concat(node.tag);
-      } else {
-        node.classStr = node.tag;
-      }
-      if (node.tagType === 'inline') {
-        node.classStr += ' inline';
-      }
-
-      // 对img添加额外数据
-      if (node.tag === 'img') {
-        var imgUrl = node.attr.src;
-        imgUrl = _wxDiscode.default.urlToHttpUrl(imgUrl, imageProp.domain);
-        Object.assign(node.attr, imageProp, {
-          src: imgUrl || '' });
-
-        if (imgUrl) {
-          results.imageUrls.push(imgUrl);
-        }
-      }
-
-      // 处理a标签属性
-      if (node.tag === 'a') {
-        node.attr.href = node.attr.href || '';
-      }
-
-      // 处理font标签样式属性
-      if (node.tag === 'font') {
-        var fontSize = [
-        'x-small',
-        'small',
-        'medium',
-        'large',
-        'x-large',
-        'xx-large',
-        '-webkit-xxx-large'];
-
-        var styleAttrs = {
-          color: 'color',
-          face: 'font-family',
-          size: 'font-size' };
-
-        if (!node.styleStr) node.styleStr = '';
-        Object.keys(styleAttrs).forEach(function (key) {
-          if (node.attr[key]) {
-            var value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
-            node.styleStr += "".concat(styleAttrs[key], ": ").concat(value, ";");
-          }
-        });
-      }
-
-      // 临时记录source资源
-      if (node.tag === 'source') {
-        results.source = node.attr.src;
-      }
-
-      if (customHandler.start) {
-        customHandler.start(node, results);
-      }
-
-      if (unary) {
-        // if this tag doesn't have end tag
-        // like <img src="hoge.png"/>
-        // add to parents
-        var _parent = bufArray[0] || results;
-        if (_parent.nodes === undefined) {
-          _parent.nodes = [];
-        }
-        _parent.nodes.push(node);
-      } else {
-        bufArray.unshift(node);
-      }
-    },
-    end: function end(tag) {
-      // merge into parent tag
-      var node = bufArray.shift();
-      if (node.tag !== tag) {
-        console.error('invalid state: mismatch end tag');
-      }
-
-      // 当有缓存source资源时于于video补上src资源
-      if (node.tag === 'video' && results.source) {
-        node.attr.src = results.source;
-        delete results.source;
-      }
-
-      if (customHandler.end) {
-        customHandler.end(node, results);
-      }
-
-      if (bufArray.length === 0) {
-        results.nodes.push(node);
-      } else {
-        var parent = bufArray[0];
-        if (!parent.nodes) {
-          parent.nodes = [];
-        }
-        parent.nodes.push(node);
-      }
-    },
-    chars: function chars(text) {
-      if (!text.trim()) return;
-
-      var node = {
-        node: 'text',
-        text: text };
-
-
-      if (customHandler.chars) {
-        customHandler.chars(node, results);
-      }
-
-      if (bufArray.length === 0) {
-        results.nodes.push(node);
-      } else {
-        var parent = bufArray[0];
-        if (parent.nodes === undefined) {
-          parent.nodes = [];
-        }
-        parent.nodes.push(node);
-      }
-    } });
-
-
-  return results;
-}var _default =
-
-html2json;exports.default = _default;
+//更改用户头像
+exports.get_update_path = get_update_path;var update_user_avatar = function update_user_avatar(data) {return (0, _http.default)({
+    name: 'update_user_avatar',
+    data: data });};exports.update_user_avatar = update_user_avatar;
 
 /***/ }),
 
@@ -5143,432 +4893,6 @@ html2json;exports.default = _default;
 
 /***/ }),
 
-/***/ 180:
-/*!****************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/wxDiscode.js ***!
-  \****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // HTML 支持的数学符号
-function strNumDiscode(str) {
-  str = str.replace(/&forall;|&#8704;|&#x2200;/g, '∀');
-  str = str.replace(/&part;|&#8706;|&#x2202;/g, '∂');
-  str = str.replace(/&exist;|&#8707;|&#x2203;/g, '∃');
-  str = str.replace(/&empty;|&#8709;|&#x2205;/g, '∅');
-  str = str.replace(/&nabla;|&#8711;|&#x2207;/g, '∇');
-  str = str.replace(/&isin;|&#8712;|&#x2208;/g, '∈');
-  str = str.replace(/&notin;|&#8713;|&#x2209;/g, '∉');
-  str = str.replace(/&ni;|&#8715;|&#x220b;/g, '∋');
-  str = str.replace(/&prod;|&#8719;|&#x220f;/g, '∏');
-  str = str.replace(/&sum;|&#8721;|&#x2211;/g, '∑');
-  str = str.replace(/&minus;|&#8722;|&#x2212;/g, '−');
-  str = str.replace(/&lowast;|&#8727;|&#x2217;/g, '∗');
-  str = str.replace(/&radic;|&#8730;|&#x221a;/g, '√');
-  str = str.replace(/&prop;|&#8733;|&#x221d;/g, '∝');
-  str = str.replace(/&infin;|&#8734;|&#x221e;/g, '∞');
-  str = str.replace(/&ang;|&#8736;|&#x2220;/g, '∠');
-  str = str.replace(/&and;|&#8743;|&#x2227;/g, '∧');
-  str = str.replace(/&or;|&#8744;|&#x2228;/g, '∨');
-  str = str.replace(/&cap;|&#8745;|&#x2229;/g, '∩');
-  str = str.replace(/&cup;|&#8746;|&#x222a;/g, '∪');
-  str = str.replace(/&int;|&#8747;|&#x222b;/g, '∫');
-  str = str.replace(/&there4;|&#8756;|&#x2234;/g, '∴');
-  str = str.replace(/&sim;|&#8764;|&#x223c;/g, '∼');
-  str = str.replace(/&cong;|&#8773;|&#x2245;/g, '≅');
-  str = str.replace(/&asymp;|&#8776;|&#x2248;/g, '≈');
-  str = str.replace(/&ne;|&#8800;|&#x2260;/g, '≠');
-  str = str.replace(/&le;|&#8804;|&#x2264;/g, '≤');
-  str = str.replace(/&ge;|&#8805;|&#x2265;/g, '≥');
-  str = str.replace(/&sub;|&#8834;|&#x2282;/g, '⊂');
-  str = str.replace(/&sup;|&#8835;|&#x2283;/g, '⊃');
-  str = str.replace(/&nsub;|&#8836;|&#x2284;/g, '⊄');
-  str = str.replace(/&sube;|&#8838;|&#x2286;/g, '⊆');
-  str = str.replace(/&supe;|&#8839;|&#x2287;/g, '⊇');
-  str = str.replace(/&oplus;|&#8853;|&#x2295;/g, '⊕');
-  str = str.replace(/&otimes;|&#8855;|&#x2297;/g, '⊗');
-  str = str.replace(/&perp;|&#8869;|&#x22a5;/g, '⊥');
-  str = str.replace(/&sdot;|&#8901;|&#x22c5;/g, '⋅');
-  return str;
-}
-
-// HTML 支持的希腊字母
-function strGreeceDiscode(str) {
-  str = str.replace(/&Alpha;|&#913;|&#x391;/g, 'Α');
-  str = str.replace(/&Beta;|&#914;|&#x392;/g, 'Β');
-  str = str.replace(/&Gamma;|&#915;|&#x393;/g, 'Γ');
-  str = str.replace(/&Delta;|&#916;|&#x394;/g, 'Δ');
-  str = str.replace(/&Epsilon;|&#917;|&#x395;/g, 'Ε');
-  str = str.replace(/&Zeta;|&#918;|&#x396;/g, 'Ζ');
-  str = str.replace(/&Eta;|&#919;|&#x397;/g, 'Η');
-  str = str.replace(/&Theta;|&#920;|&#x398;/g, 'Θ');
-  str = str.replace(/&Iota;|&#921;|&#x399;/g, 'Ι');
-  str = str.replace(/&Kappa;|&#922;|&#x39a;/g, 'Κ');
-  str = str.replace(/&Lambda;|&#923;|&#x39b;/g, 'Λ');
-  str = str.replace(/&Mu;|&#924;|&#x39c;/g, 'Μ');
-  str = str.replace(/&Nu;|&#925;|&#x39d;/g, 'Ν');
-  str = str.replace(/&Xi;|&#925;|&#x39d;/g, 'Ν');
-  str = str.replace(/&Omicron;|&#927;|&#x39f;/g, 'Ο');
-  str = str.replace(/&Pi;|&#928;|&#x3a0;/g, 'Π');
-  str = str.replace(/&Rho;|&#929;|&#x3a1;/g, 'Ρ');
-  str = str.replace(/&Sigma;|&#931;|&#x3a3;/g, 'Σ');
-  str = str.replace(/&Tau;|&#932;|&#x3a4;/g, 'Τ');
-  str = str.replace(/&Upsilon;|&#933;|&#x3a5;/g, 'Υ');
-  str = str.replace(/&Phi;|&#934;|&#x3a6;/g, 'Φ');
-  str = str.replace(/&Chi;|&#935;|&#x3a7;/g, 'Χ');
-  str = str.replace(/&Psi;|&#936;|&#x3a8;/g, 'Ψ');
-  str = str.replace(/&Omega;|&#937;|&#x3a9;/g, 'Ω');
-
-  str = str.replace(/&alpha;|&#945;|&#x3b1;/g, 'α');
-  str = str.replace(/&beta;|&#946;|&#x3b2;/g, 'β');
-  str = str.replace(/&gamma;|&#947;|&#x3b3;/g, 'γ');
-  str = str.replace(/&delta;|&#948;|&#x3b4;/g, 'δ');
-  str = str.replace(/&epsilon;|&#949;|&#x3b5;/g, 'ε');
-  str = str.replace(/&zeta;|&#950;|&#x3b6;/g, 'ζ');
-  str = str.replace(/&eta;|&#951;|&#x3b7;/g, 'η');
-  str = str.replace(/&theta;|&#952;|&#x3b8;/g, 'θ');
-  str = str.replace(/&iota;|&#953;|&#x3b9;/g, 'ι');
-  str = str.replace(/&kappa;|&#954;|&#x3ba;/g, 'κ');
-  str = str.replace(/&lambda;|&#955;|&#x3bb;/g, 'λ');
-  str = str.replace(/&mu;|&#956;|&#x3bc;/g, 'μ');
-  str = str.replace(/&nu;|&#957;|&#x3bd;/g, 'ν');
-  str = str.replace(/&xi;|&#958;|&#x3be;/g, 'ξ');
-  str = str.replace(/&omicron;|&#959;|&#x3bf;/g, 'ο');
-  str = str.replace(/&pi;|&#960;|&#x3c0;/g, 'π');
-  str = str.replace(/&rho;|&#961;|&#x3c1;/g, 'ρ');
-  str = str.replace(/&sigmaf;|&#962;|&#x3c2;/g, 'ς');
-  str = str.replace(/&sigma;|&#963;|&#x3c3;/g, 'σ');
-  str = str.replace(/&tau;|&#964;|&#x3c4;/g, 'τ');
-  str = str.replace(/&upsilon;|&#965;|&#x3c5;/g, 'υ');
-  str = str.replace(/&phi;|&#966;|&#x3c6;/g, 'φ');
-  str = str.replace(/&chi;|&#967;|&#x3c7;/g, 'χ');
-  str = str.replace(/&psi;|&#968;|&#x3c8;/g, 'ψ');
-  str = str.replace(/&omega;|&#969;|&#x3c9;/g, 'ω');
-  str = str.replace(/&thetasym;|&#977;|&#x3d1;/g, 'ϑ');
-  str = str.replace(/&upsih;|&#978;|&#x3d2;/g, 'ϒ');
-  str = str.replace(/&piv;|&#982;|&#x3d6;/g, 'ϖ');
-  str = str.replace(/&middot;|&#183;|&#xb7;/g, '·');
-  return str;
-}
-
-function strcharacterDiscode(str) {
-  // 加入常用解析
-
-  // str = str.replace(/&nbsp;|&#32;|&#x20;/g, "&nbsp;");
-  // str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '&ensp;');
-  // str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
-  // str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '&emsp;');
-  // str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
-  // str = str.replace(/&apos;|&#39;|&#x27;/g, "&apos;");
-  // str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
-  // str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
-  // str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
-  // str = str.replace(/&amp;|&#38;|&#x26;/g, '&amp;');
-  // str = str.replace(/&lt;|&#60;|&#x3c;/g, '&lt;');
-  // str = str.replace(/&gt;|&#62;|&#x3e;/g, '&gt;');
-
-
-
-
-  str = str.replace(/&nbsp;|&#32;|&#x20;/g, "<span class='spaceshow'> </span>");
-  str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '<span class=\'spaceshow\'> </span>');
-  str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
-  str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '<span class=\'spaceshow\'> </span>');
-  str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
-  str = str.replace(/&quot;|&#39;|&#x27;/g, "'");
-  str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
-  str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
-  str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
-  str = str.replace(/&amp;|&#38;|&#x26;/g, '&');
-  str = str.replace(/&lt;|&#60;|&#x3c;/g, '<');
-  str = str.replace(/&gt;|&#62;|&#x3e;/g, '>');
-  return str;
-}
-
-// HTML 支持的其他实体
-function strOtherDiscode(str) {
-  str = str.replace(/&OElig;|&#338;|&#x152;/g, 'Œ');
-  str = str.replace(/&oelig;|&#339;|&#x153;/g, 'œ');
-  str = str.replace(/&Scaron;|&#352;|&#x160;/g, 'Š');
-  str = str.replace(/&scaron;|&#353;|&#x161;/g, 'š');
-  str = str.replace(/&Yuml;|&#376;|&#x178;/g, 'Ÿ');
-  str = str.replace(/&fnof;|&#402;|&#x192;/g, 'ƒ');
-  str = str.replace(/&circ;|&#710;|&#x2c6;/g, 'ˆ');
-  str = str.replace(/&tilde;|&#732;|&#x2dc;/g, '˜');
-  str = str.replace(/&thinsp;|$#8201;|&#x2009;/g, '<span class=\'spaceshow\'> </span>');
-  str = str.replace(/&zwnj;|&#8204;|&#x200C;/g, '<span class=\'spaceshow\'>‌</span>');
-  str = str.replace(/&zwj;|$#8205;|&#x200D;/g, '<span class=\'spaceshow\'>‍</span>');
-  str = str.replace(/&lrm;|$#8206;|&#x200E;/g, '<span class=\'spaceshow\'>‎</span>');
-  str = str.replace(/&rlm;|&#8207;|&#x200F;/g, '<span class=\'spaceshow\'>‏</span>');
-  str = str.replace(/&ndash;|&#8211;|&#x2013;/g, '–');
-  str = str.replace(/&mdash;|&#8212;|&#x2014;/g, '—');
-  str = str.replace(/&lsquo;|&#8216;|&#x2018;/g, '‘');
-  str = str.replace(/&rsquo;|&#8217;|&#x2019;/g, '’');
-  str = str.replace(/&sbquo;|&#8218;|&#x201a;/g, '‚');
-  str = str.replace(/&ldquo;|&#8220;|&#x201c;/g, '“');
-  str = str.replace(/&rdquo;|&#8221;|&#x201d;/g, '”');
-  str = str.replace(/&bdquo;|&#8222;|&#x201e;/g, '„');
-  str = str.replace(/&dagger;|&#8224;|&#x2020;/g, '†');
-  str = str.replace(/&Dagger;|&#8225;|&#x2021;/g, '‡');
-  str = str.replace(/&bull;|&#8226;|&#x2022;/g, '•');
-  str = str.replace(/&hellip;|&#8230;|&#x2026;/g, '…');
-  str = str.replace(/&permil;|&#8240;|&#x2030;/g, '‰');
-  str = str.replace(/&prime;|&#8242;|&#x2032;/g, '′');
-  str = str.replace(/&Prime;|&#8243;|&#x2033;/g, '″');
-  str = str.replace(/&lsaquo;|&#8249;|&#x2039;/g, '‹');
-  str = str.replace(/&rsaquo;|&#8250;|&#x203a;/g, '›');
-  str = str.replace(/&oline;|&#8254;|&#x203e;/g, '‾');
-  str = str.replace(/&euro;|&#8364;|&#x20ac;/g, '€');
-  str = str.replace(/&trade;|&#8482;|&#x2122;/g, '™');
-  str = str.replace(/&larr;|&#8592;|&#x2190;/g, '←');
-  str = str.replace(/&uarr;|&#8593;|&#x2191;/g, '↑');
-  str = str.replace(/&rarr;|&#8594;|&#x2192;/g, '→');
-  str = str.replace(/&darr;|&#8595;|&#x2193;/g, '↓');
-  str = str.replace(/&harr;|&#8596;|&#x2194;/g, '↔');
-  str = str.replace(/&crarr;|&#8629;|&#x21b5;/g, '↵');
-  str = str.replace(/&lceil;|&#8968;|&#x2308;/g, '⌈');
-  str = str.replace(/&rceil;|&#8969;|&#x2309;/g, '⌉');
-  str = str.replace(/&lfloor;|&#8970;|&#x230a;/g, '⌊');
-  str = str.replace(/&rfloor;|&#8971;|&#x230b;/g, '⌋');
-  str = str.replace(/&loz;|&#9674;|&#x25ca;/g, '◊');
-  str = str.replace(/&spades;|&#9824;|&#x2660;/g, '♠');
-  str = str.replace(/&clubs;|&#9827;|&#x2663;/g, '♣');
-  str = str.replace(/&hearts;|&#9829;|&#x2665;/g, '♥');
-  str = str.replace(/&diams;|&#9830;|&#x2666;/g, '♦');
-  return str;
-}
-
-function strDiscode(str) {
-  str = strNumDiscode(str);
-  str = strGreeceDiscode(str);
-  str = strcharacterDiscode(str);
-  str = strOtherDiscode(str);
-  return str;
-}
-
-function urlToHttpUrl(url, domain) {
-  if (/^\/\//.test(url)) {
-    return "https:".concat(url);
-  } else if (/^\//.test(url)) {
-    return "https://".concat(domain).concat(url);
-  }
-  return url;
-}var _default =
-
-{
-  strDiscode: strDiscode,
-  urlToHttpUrl: urlToHttpUrl };exports.default = _default;
-
-/***/ }),
-
-/***/ 181:
-/*!*****************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/htmlparser.js ***!
-  \*****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
- *
- * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
- *
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *               垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-// Regular Expressions for parsing tags and attributes
-
-var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z0-9_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
-var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
-var attr = /([a-zA-Z0-9_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
-
-function makeMap(str) {
-  var obj = {};
-  var items = str.split(',');
-  for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}
-  return obj;
-}
-
-// Empty Elements - HTML 5
-var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr');
-
-// Block Elements - HTML 5
-var block = makeMap('address,code,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
-
-// Inline Elements - HTML 5
-var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
-
-// Elements that you can, intentionally, leave open
-// (and which close themselves)
-var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
-
-// Attributes that have their values filled in disabled="disabled"
-var fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
-
-function HTMLParser(html, handler) {
-  var index;
-  var chars;
-  var match;
-  var last = html;
-  var stack = [];
-
-  stack.last = function () {return stack[stack.length - 1];};
-
-  function parseEndTag(tag, tagName) {
-    // If no tag name is provided, clean shop
-    var pos;
-    if (!tagName) {
-      pos = 0;
-    } else {
-      // Find the closest opened tag of the same type
-      tagName = tagName.toLowerCase();
-      for (pos = stack.length - 1; pos >= 0; pos -= 1) {
-        if (stack[pos] === tagName) break;
-      }
-    }
-    if (pos >= 0) {
-      // Close all the open elements, up the stack
-      for (var i = stack.length - 1; i >= pos; i -= 1) {
-        if (handler.end) handler.end(stack[i]);
-      }
-
-      // Remove the open elements from the stack
-      stack.length = pos;
-    }
-  }
-
-  function parseStartTag(tag, tagName, rest, unary) {
-    tagName = tagName.toLowerCase();
-
-    if (block[tagName]) {
-      while (stack.last() && inline[stack.last()]) {
-        parseEndTag('', stack.last());
-      }
-    }
-
-    if (closeSelf[tagName] && stack.last() === tagName) {
-      parseEndTag('', tagName);
-    }
-
-    unary = empty[tagName] || !!unary;
-
-    if (!unary) stack.push(tagName);
-
-    if (handler.start) {
-      var attrs = [];
-
-      rest.replace(attr, function genAttr(matches, name) {
-        var value = arguments[2] || arguments[3] || arguments[4] || (fillAttrs[name] ? name : '');
-
-        attrs.push({
-          name: name,
-          value: value,
-          escaped: value.replace(/(^|[^\\])"/g, '$1\\"') // "
-        });
-      });
-
-      if (handler.start) {
-        handler.start(tagName, attrs, unary);
-      }
-    }
-  }
-
-  while (html) {
-    chars = true;
-
-    if (html.indexOf('</') === 0) {
-      match = html.match(endTag);
-
-      if (match) {
-        html = html.substring(match[0].length);
-        match[0].replace(endTag, parseEndTag);
-        chars = false;
-      }
-
-      // start tag
-    } else if (html.indexOf('<') === 0) {
-      match = html.match(startTag);
-
-      if (match) {
-        html = html.substring(match[0].length);
-        match[0].replace(startTag, parseStartTag);
-        chars = false;
-      }
-    }
-
-    if (chars) {
-      index = html.indexOf('<');
-      var text = '';
-      while (index === 0) {
-        text += '<';
-        html = html.substring(1);
-        index = html.indexOf('<');
-      }
-      text += index < 0 ? html : html.substring(0, index);
-      html = index < 0 ? '' : html.substring(index);
-
-      if (handler.chars) handler.chars(text);
-    }
-
-    if (html === last) throw new Error("Parse Error: ".concat(html));
-    last = html;
-  }
-
-  // Clean up any remaining tags
-  parseEndTag();
-}var _default =
-
-HTMLParser;exports.default = _default;
-
-/***/ }),
-
-/***/ 187:
-/*!***************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \***************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 188));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 189));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 190));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
-{
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default };exports.default = _default;
-
-/***/ }),
-
-/***/ 188:
-/*!**************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \**************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
-
-/***/ }),
-
-/***/ 189:
-/*!*******************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \*******************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
-
-/***/ }),
-
 /***/ 19:
 /*!********************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/common/commonLogin/commonLogin.js ***!
@@ -5604,17 +4928,6 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 190:
-/*!*******************************************************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \*******************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
 
 /***/ }),
 
@@ -6906,7 +6219,860 @@ module.exports = index_cjs;
 
 /***/ }),
 
-/***/ 205:
+/***/ 206:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/html2json.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 207));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 208));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+ * html2Json 改造来自: https://github.com/Jxck/html2json
+ *
+ *
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *               垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */function makeMap(str) {var obj = {};var items = str.split(',');for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}return obj;} // Block Elements - HTML 5
+var block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video'); // Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+function removeDOCTYPE(html) {
+  var isDocument = /<body.*>([^]*)<\/body>/.test(html);
+  return isDocument ? RegExp.$1 : html;
+}
+
+function trimHtml(html) {
+  return html.
+  replace(/<!--.*?-->/gi, '').
+  replace(/\/\*.*?\*\//gi, '').
+  replace(/[ ]+</gi, '<').
+  replace(/<script[^]*<\/script>/gi, '').
+  replace(/<style[^]*<\/style>/gi, '');
+}
+
+function getScreenInfo() {
+  var screen = {};
+  wx.getSystemInfo({
+    success: function success(res) {
+      screen.width = res.windowWidth;
+      screen.height = res.windowHeight;
+    } });
+
+  return screen;
+}
+
+function html2json(html, customHandler, imageProp, host) {
+  // 处理字符串
+  html = removeDOCTYPE(html);
+  html = trimHtml(html);
+  html = _wxDiscode.default.strDiscode(html);
+  // 生成node节点
+  var bufArray = [];
+  var results = {
+    nodes: [],
+    imageUrls: [] };
+
+
+  var screen = getScreenInfo();
+  function Node(tag) {
+    this.node = 'element';
+    this.tag = tag;
+
+    this.$screen = screen;
+  }
+
+  (0, _htmlparser.default)(html, {
+    start: function start(tag, attrs, unary) {
+      // node for this element
+      var node = new Node(tag);
+
+      if (bufArray.length !== 0) {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+      }
+
+      if (block[tag]) {
+        node.tagType = 'block';
+      } else if (inline[tag]) {
+        node.tagType = 'inline';
+      } else if (closeSelf[tag]) {
+        node.tagType = 'closeSelf';
+      }
+
+      node.attr = attrs.reduce(function (pre, attr) {
+        var name = attr.name;
+        var value = attr.value;
+        if (name === 'class') {
+          node.classStr = value;
+        }
+        // has multi attibutes
+        // make it array of attribute
+        if (name === 'style') {
+          node.styleStr = value;
+        }
+        if (value.match(/ /)) {
+          value = value.split(' ');
+        }
+
+        // if attr already exists
+        // merge it
+        if (pre[name]) {
+          if (Array.isArray(pre[name])) {
+            // already array, push to last
+            pre[name].push(value);
+          } else {
+            // single value, make it array
+            pre[name] = [pre[name], value];
+          }
+        } else {
+          // not exist, put it
+          pre[name] = value;
+        }
+
+        return pre;
+      }, {});
+
+      // 优化样式相关属性
+      if (node.classStr) {
+        node.classStr += " ".concat(node.tag);
+      } else {
+        node.classStr = node.tag;
+      }
+      if (node.tagType === 'inline') {
+        node.classStr += ' inline';
+      }
+
+      // 对img添加额外数据
+      if (node.tag === 'img') {
+        var imgUrl = node.attr.src;
+        imgUrl = _wxDiscode.default.urlToHttpUrl(imgUrl, imageProp.domain);
+        Object.assign(node.attr, imageProp, {
+          src: imgUrl || '' });
+
+        if (imgUrl) {
+          results.imageUrls.push(imgUrl);
+        }
+      }
+
+      // 处理a标签属性
+      if (node.tag === 'a') {
+        node.attr.href = node.attr.href || '';
+      }
+
+      // 处理font标签样式属性
+      if (node.tag === 'font') {
+        var fontSize = [
+        'x-small',
+        'small',
+        'medium',
+        'large',
+        'x-large',
+        'xx-large',
+        '-webkit-xxx-large'];
+
+        var styleAttrs = {
+          color: 'color',
+          face: 'font-family',
+          size: 'font-size' };
+
+        if (!node.styleStr) node.styleStr = '';
+        Object.keys(styleAttrs).forEach(function (key) {
+          if (node.attr[key]) {
+            var value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
+            node.styleStr += "".concat(styleAttrs[key], ": ").concat(value, ";");
+          }
+        });
+      }
+
+      // 临时记录source资源
+      if (node.tag === 'source') {
+        results.source = node.attr.src;
+      }
+
+      if (customHandler.start) {
+        customHandler.start(node, results);
+      }
+
+      if (unary) {
+        // if this tag doesn't have end tag
+        // like <img src="hoge.png"/>
+        // add to parents
+        var _parent = bufArray[0] || results;
+        if (_parent.nodes === undefined) {
+          _parent.nodes = [];
+        }
+        _parent.nodes.push(node);
+      } else {
+        bufArray.unshift(node);
+      }
+    },
+    end: function end(tag) {
+      // merge into parent tag
+      var node = bufArray.shift();
+      if (node.tag !== tag) {
+        console.error('invalid state: mismatch end tag');
+      }
+
+      // 当有缓存source资源时于于video补上src资源
+      if (node.tag === 'video' && results.source) {
+        node.attr.src = results.source;
+        delete results.source;
+      }
+
+      if (customHandler.end) {
+        customHandler.end(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (!parent.nodes) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    },
+    chars: function chars(text) {
+      if (!text.trim()) return;
+
+      var node = {
+        node: 'text',
+        text: text };
+
+
+      if (customHandler.chars) {
+        customHandler.chars(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    } });
+
+
+  return results;
+}var _default =
+
+html2json;exports.default = _default;
+
+/***/ }),
+
+/***/ 207:
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/wxDiscode.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // HTML 支持的数学符号
+function strNumDiscode(str) {
+  str = str.replace(/&forall;|&#8704;|&#x2200;/g, '∀');
+  str = str.replace(/&part;|&#8706;|&#x2202;/g, '∂');
+  str = str.replace(/&exist;|&#8707;|&#x2203;/g, '∃');
+  str = str.replace(/&empty;|&#8709;|&#x2205;/g, '∅');
+  str = str.replace(/&nabla;|&#8711;|&#x2207;/g, '∇');
+  str = str.replace(/&isin;|&#8712;|&#x2208;/g, '∈');
+  str = str.replace(/&notin;|&#8713;|&#x2209;/g, '∉');
+  str = str.replace(/&ni;|&#8715;|&#x220b;/g, '∋');
+  str = str.replace(/&prod;|&#8719;|&#x220f;/g, '∏');
+  str = str.replace(/&sum;|&#8721;|&#x2211;/g, '∑');
+  str = str.replace(/&minus;|&#8722;|&#x2212;/g, '−');
+  str = str.replace(/&lowast;|&#8727;|&#x2217;/g, '∗');
+  str = str.replace(/&radic;|&#8730;|&#x221a;/g, '√');
+  str = str.replace(/&prop;|&#8733;|&#x221d;/g, '∝');
+  str = str.replace(/&infin;|&#8734;|&#x221e;/g, '∞');
+  str = str.replace(/&ang;|&#8736;|&#x2220;/g, '∠');
+  str = str.replace(/&and;|&#8743;|&#x2227;/g, '∧');
+  str = str.replace(/&or;|&#8744;|&#x2228;/g, '∨');
+  str = str.replace(/&cap;|&#8745;|&#x2229;/g, '∩');
+  str = str.replace(/&cup;|&#8746;|&#x222a;/g, '∪');
+  str = str.replace(/&int;|&#8747;|&#x222b;/g, '∫');
+  str = str.replace(/&there4;|&#8756;|&#x2234;/g, '∴');
+  str = str.replace(/&sim;|&#8764;|&#x223c;/g, '∼');
+  str = str.replace(/&cong;|&#8773;|&#x2245;/g, '≅');
+  str = str.replace(/&asymp;|&#8776;|&#x2248;/g, '≈');
+  str = str.replace(/&ne;|&#8800;|&#x2260;/g, '≠');
+  str = str.replace(/&le;|&#8804;|&#x2264;/g, '≤');
+  str = str.replace(/&ge;|&#8805;|&#x2265;/g, '≥');
+  str = str.replace(/&sub;|&#8834;|&#x2282;/g, '⊂');
+  str = str.replace(/&sup;|&#8835;|&#x2283;/g, '⊃');
+  str = str.replace(/&nsub;|&#8836;|&#x2284;/g, '⊄');
+  str = str.replace(/&sube;|&#8838;|&#x2286;/g, '⊆');
+  str = str.replace(/&supe;|&#8839;|&#x2287;/g, '⊇');
+  str = str.replace(/&oplus;|&#8853;|&#x2295;/g, '⊕');
+  str = str.replace(/&otimes;|&#8855;|&#x2297;/g, '⊗');
+  str = str.replace(/&perp;|&#8869;|&#x22a5;/g, '⊥');
+  str = str.replace(/&sdot;|&#8901;|&#x22c5;/g, '⋅');
+  return str;
+}
+
+// HTML 支持的希腊字母
+function strGreeceDiscode(str) {
+  str = str.replace(/&Alpha;|&#913;|&#x391;/g, 'Α');
+  str = str.replace(/&Beta;|&#914;|&#x392;/g, 'Β');
+  str = str.replace(/&Gamma;|&#915;|&#x393;/g, 'Γ');
+  str = str.replace(/&Delta;|&#916;|&#x394;/g, 'Δ');
+  str = str.replace(/&Epsilon;|&#917;|&#x395;/g, 'Ε');
+  str = str.replace(/&Zeta;|&#918;|&#x396;/g, 'Ζ');
+  str = str.replace(/&Eta;|&#919;|&#x397;/g, 'Η');
+  str = str.replace(/&Theta;|&#920;|&#x398;/g, 'Θ');
+  str = str.replace(/&Iota;|&#921;|&#x399;/g, 'Ι');
+  str = str.replace(/&Kappa;|&#922;|&#x39a;/g, 'Κ');
+  str = str.replace(/&Lambda;|&#923;|&#x39b;/g, 'Λ');
+  str = str.replace(/&Mu;|&#924;|&#x39c;/g, 'Μ');
+  str = str.replace(/&Nu;|&#925;|&#x39d;/g, 'Ν');
+  str = str.replace(/&Xi;|&#925;|&#x39d;/g, 'Ν');
+  str = str.replace(/&Omicron;|&#927;|&#x39f;/g, 'Ο');
+  str = str.replace(/&Pi;|&#928;|&#x3a0;/g, 'Π');
+  str = str.replace(/&Rho;|&#929;|&#x3a1;/g, 'Ρ');
+  str = str.replace(/&Sigma;|&#931;|&#x3a3;/g, 'Σ');
+  str = str.replace(/&Tau;|&#932;|&#x3a4;/g, 'Τ');
+  str = str.replace(/&Upsilon;|&#933;|&#x3a5;/g, 'Υ');
+  str = str.replace(/&Phi;|&#934;|&#x3a6;/g, 'Φ');
+  str = str.replace(/&Chi;|&#935;|&#x3a7;/g, 'Χ');
+  str = str.replace(/&Psi;|&#936;|&#x3a8;/g, 'Ψ');
+  str = str.replace(/&Omega;|&#937;|&#x3a9;/g, 'Ω');
+
+  str = str.replace(/&alpha;|&#945;|&#x3b1;/g, 'α');
+  str = str.replace(/&beta;|&#946;|&#x3b2;/g, 'β');
+  str = str.replace(/&gamma;|&#947;|&#x3b3;/g, 'γ');
+  str = str.replace(/&delta;|&#948;|&#x3b4;/g, 'δ');
+  str = str.replace(/&epsilon;|&#949;|&#x3b5;/g, 'ε');
+  str = str.replace(/&zeta;|&#950;|&#x3b6;/g, 'ζ');
+  str = str.replace(/&eta;|&#951;|&#x3b7;/g, 'η');
+  str = str.replace(/&theta;|&#952;|&#x3b8;/g, 'θ');
+  str = str.replace(/&iota;|&#953;|&#x3b9;/g, 'ι');
+  str = str.replace(/&kappa;|&#954;|&#x3ba;/g, 'κ');
+  str = str.replace(/&lambda;|&#955;|&#x3bb;/g, 'λ');
+  str = str.replace(/&mu;|&#956;|&#x3bc;/g, 'μ');
+  str = str.replace(/&nu;|&#957;|&#x3bd;/g, 'ν');
+  str = str.replace(/&xi;|&#958;|&#x3be;/g, 'ξ');
+  str = str.replace(/&omicron;|&#959;|&#x3bf;/g, 'ο');
+  str = str.replace(/&pi;|&#960;|&#x3c0;/g, 'π');
+  str = str.replace(/&rho;|&#961;|&#x3c1;/g, 'ρ');
+  str = str.replace(/&sigmaf;|&#962;|&#x3c2;/g, 'ς');
+  str = str.replace(/&sigma;|&#963;|&#x3c3;/g, 'σ');
+  str = str.replace(/&tau;|&#964;|&#x3c4;/g, 'τ');
+  str = str.replace(/&upsilon;|&#965;|&#x3c5;/g, 'υ');
+  str = str.replace(/&phi;|&#966;|&#x3c6;/g, 'φ');
+  str = str.replace(/&chi;|&#967;|&#x3c7;/g, 'χ');
+  str = str.replace(/&psi;|&#968;|&#x3c8;/g, 'ψ');
+  str = str.replace(/&omega;|&#969;|&#x3c9;/g, 'ω');
+  str = str.replace(/&thetasym;|&#977;|&#x3d1;/g, 'ϑ');
+  str = str.replace(/&upsih;|&#978;|&#x3d2;/g, 'ϒ');
+  str = str.replace(/&piv;|&#982;|&#x3d6;/g, 'ϖ');
+  str = str.replace(/&middot;|&#183;|&#xb7;/g, '·');
+  return str;
+}
+
+function strcharacterDiscode(str) {
+  // 加入常用解析
+
+  // str = str.replace(/&nbsp;|&#32;|&#x20;/g, "&nbsp;");
+  // str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '&ensp;');
+  // str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
+  // str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '&emsp;');
+  // str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
+  // str = str.replace(/&apos;|&#39;|&#x27;/g, "&apos;");
+  // str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
+  // str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
+  // str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
+  // str = str.replace(/&amp;|&#38;|&#x26;/g, '&amp;');
+  // str = str.replace(/&lt;|&#60;|&#x3c;/g, '&lt;');
+  // str = str.replace(/&gt;|&#62;|&#x3e;/g, '&gt;');
+
+
+
+
+  str = str.replace(/&nbsp;|&#32;|&#x20;/g, "<span class='spaceshow'> </span>");
+  str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
+  str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
+  str = str.replace(/&quot;|&#39;|&#x27;/g, "'");
+  str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
+  str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
+  str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
+  str = str.replace(/&amp;|&#38;|&#x26;/g, '&');
+  str = str.replace(/&lt;|&#60;|&#x3c;/g, '<');
+  str = str.replace(/&gt;|&#62;|&#x3e;/g, '>');
+  return str;
+}
+
+// HTML 支持的其他实体
+function strOtherDiscode(str) {
+  str = str.replace(/&OElig;|&#338;|&#x152;/g, 'Œ');
+  str = str.replace(/&oelig;|&#339;|&#x153;/g, 'œ');
+  str = str.replace(/&Scaron;|&#352;|&#x160;/g, 'Š');
+  str = str.replace(/&scaron;|&#353;|&#x161;/g, 'š');
+  str = str.replace(/&Yuml;|&#376;|&#x178;/g, 'Ÿ');
+  str = str.replace(/&fnof;|&#402;|&#x192;/g, 'ƒ');
+  str = str.replace(/&circ;|&#710;|&#x2c6;/g, 'ˆ');
+  str = str.replace(/&tilde;|&#732;|&#x2dc;/g, '˜');
+  str = str.replace(/&thinsp;|$#8201;|&#x2009;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&zwnj;|&#8204;|&#x200C;/g, '<span class=\'spaceshow\'>‌</span>');
+  str = str.replace(/&zwj;|$#8205;|&#x200D;/g, '<span class=\'spaceshow\'>‍</span>');
+  str = str.replace(/&lrm;|$#8206;|&#x200E;/g, '<span class=\'spaceshow\'>‎</span>');
+  str = str.replace(/&rlm;|&#8207;|&#x200F;/g, '<span class=\'spaceshow\'>‏</span>');
+  str = str.replace(/&ndash;|&#8211;|&#x2013;/g, '–');
+  str = str.replace(/&mdash;|&#8212;|&#x2014;/g, '—');
+  str = str.replace(/&lsquo;|&#8216;|&#x2018;/g, '‘');
+  str = str.replace(/&rsquo;|&#8217;|&#x2019;/g, '’');
+  str = str.replace(/&sbquo;|&#8218;|&#x201a;/g, '‚');
+  str = str.replace(/&ldquo;|&#8220;|&#x201c;/g, '“');
+  str = str.replace(/&rdquo;|&#8221;|&#x201d;/g, '”');
+  str = str.replace(/&bdquo;|&#8222;|&#x201e;/g, '„');
+  str = str.replace(/&dagger;|&#8224;|&#x2020;/g, '†');
+  str = str.replace(/&Dagger;|&#8225;|&#x2021;/g, '‡');
+  str = str.replace(/&bull;|&#8226;|&#x2022;/g, '•');
+  str = str.replace(/&hellip;|&#8230;|&#x2026;/g, '…');
+  str = str.replace(/&permil;|&#8240;|&#x2030;/g, '‰');
+  str = str.replace(/&prime;|&#8242;|&#x2032;/g, '′');
+  str = str.replace(/&Prime;|&#8243;|&#x2033;/g, '″');
+  str = str.replace(/&lsaquo;|&#8249;|&#x2039;/g, '‹');
+  str = str.replace(/&rsaquo;|&#8250;|&#x203a;/g, '›');
+  str = str.replace(/&oline;|&#8254;|&#x203e;/g, '‾');
+  str = str.replace(/&euro;|&#8364;|&#x20ac;/g, '€');
+  str = str.replace(/&trade;|&#8482;|&#x2122;/g, '™');
+  str = str.replace(/&larr;|&#8592;|&#x2190;/g, '←');
+  str = str.replace(/&uarr;|&#8593;|&#x2191;/g, '↑');
+  str = str.replace(/&rarr;|&#8594;|&#x2192;/g, '→');
+  str = str.replace(/&darr;|&#8595;|&#x2193;/g, '↓');
+  str = str.replace(/&harr;|&#8596;|&#x2194;/g, '↔');
+  str = str.replace(/&crarr;|&#8629;|&#x21b5;/g, '↵');
+  str = str.replace(/&lceil;|&#8968;|&#x2308;/g, '⌈');
+  str = str.replace(/&rceil;|&#8969;|&#x2309;/g, '⌉');
+  str = str.replace(/&lfloor;|&#8970;|&#x230a;/g, '⌊');
+  str = str.replace(/&rfloor;|&#8971;|&#x230b;/g, '⌋');
+  str = str.replace(/&loz;|&#9674;|&#x25ca;/g, '◊');
+  str = str.replace(/&spades;|&#9824;|&#x2660;/g, '♠');
+  str = str.replace(/&clubs;|&#9827;|&#x2663;/g, '♣');
+  str = str.replace(/&hearts;|&#9829;|&#x2665;/g, '♥');
+  str = str.replace(/&diams;|&#9830;|&#x2666;/g, '♦');
+  return str;
+}
+
+function strDiscode(str) {
+  str = strNumDiscode(str);
+  str = strGreeceDiscode(str);
+  str = strcharacterDiscode(str);
+  str = strOtherDiscode(str);
+  return str;
+}
+
+function urlToHttpUrl(url, domain) {
+  if (/^\/\//.test(url)) {
+    return "https:".concat(url);
+  } else if (/^\//.test(url)) {
+    return "https://".concat(domain).concat(url);
+  }
+  return url;
+}var _default =
+
+{
+  strDiscode: strDiscode,
+  urlToHttpUrl: urlToHttpUrl };exports.default = _default;
+
+/***/ }),
+
+/***/ 208:
+/*!*****************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/components/gaoyia-parse/libs/htmlparser.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+ *
+ * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
+ *
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *               垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+// Regular Expressions for parsing tags and attributes
+
+var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z0-9_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
+var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
+var attr = /([a-zA-Z0-9_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
+
+function makeMap(str) {
+  var obj = {};
+  var items = str.split(',');
+  for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}
+  return obj;
+}
+
+// Empty Elements - HTML 5
+var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr');
+
+// Block Elements - HTML 5
+var block = makeMap('address,code,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+// Attributes that have their values filled in disabled="disabled"
+var fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
+
+function HTMLParser(html, handler) {
+  var index;
+  var chars;
+  var match;
+  var last = html;
+  var stack = [];
+
+  stack.last = function () {return stack[stack.length - 1];};
+
+  function parseEndTag(tag, tagName) {
+    // If no tag name is provided, clean shop
+    var pos;
+    if (!tagName) {
+      pos = 0;
+    } else {
+      // Find the closest opened tag of the same type
+      tagName = tagName.toLowerCase();
+      for (pos = stack.length - 1; pos >= 0; pos -= 1) {
+        if (stack[pos] === tagName) break;
+      }
+    }
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (var i = stack.length - 1; i >= pos; i -= 1) {
+        if (handler.end) handler.end(stack[i]);
+      }
+
+      // Remove the open elements from the stack
+      stack.length = pos;
+    }
+  }
+
+  function parseStartTag(tag, tagName, rest, unary) {
+    tagName = tagName.toLowerCase();
+
+    if (block[tagName]) {
+      while (stack.last() && inline[stack.last()]) {
+        parseEndTag('', stack.last());
+      }
+    }
+
+    if (closeSelf[tagName] && stack.last() === tagName) {
+      parseEndTag('', tagName);
+    }
+
+    unary = empty[tagName] || !!unary;
+
+    if (!unary) stack.push(tagName);
+
+    if (handler.start) {
+      var attrs = [];
+
+      rest.replace(attr, function genAttr(matches, name) {
+        var value = arguments[2] || arguments[3] || arguments[4] || (fillAttrs[name] ? name : '');
+
+        attrs.push({
+          name: name,
+          value: value,
+          escaped: value.replace(/(^|[^\\])"/g, '$1\\"') // "
+        });
+      });
+
+      if (handler.start) {
+        handler.start(tagName, attrs, unary);
+      }
+    }
+  }
+
+  while (html) {
+    chars = true;
+
+    if (html.indexOf('</') === 0) {
+      match = html.match(endTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(endTag, parseEndTag);
+        chars = false;
+      }
+
+      // start tag
+    } else if (html.indexOf('<') === 0) {
+      match = html.match(startTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(startTag, parseStartTag);
+        chars = false;
+      }
+    }
+
+    if (chars) {
+      index = html.indexOf('<');
+      var text = '';
+      while (index === 0) {
+        text += '<';
+        html = html.substring(1);
+        index = html.indexOf('<');
+      }
+      text += index < 0 ? html : html.substring(0, index);
+      html = index < 0 ? '' : html.substring(index);
+
+      if (handler.chars) handler.chars(text);
+    }
+
+    if (html === last) throw new Error("Parse Error: ".concat(html));
+    last = html;
+  }
+
+  // Clean up any remaining tags
+  parseEndTag();
+}var _default =
+
+HTMLParser;exports.default = _default;
+
+/***/ }),
+
+/***/ 21:
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/common/userInfo/userInfo.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  install: function install(Vue) {
+    Vue.mixin({
+      data: function data() {var _this = this;
+        return {
+          telNumber: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+          userRules: {
+            loginName: {
+              rules: [{
+                required: true,
+                'errorMessage': "账户名不能为空" },
+
+              {
+                validateFunction: function validateFunction(rule, val, data, callback) {
+                  switch (true) {
+                    case val.length < 6:
+                      callback('用户名长度不正确');
+                      break;
+                    default:
+                      return true;}
+
+                } }
+              // 自定义验证规则
+              ] },
+
+            password: {
+              rules: [{
+                required: true,
+                'errorMessage': '密码不能为空' },
+
+              {
+                validateFunction: function validateFunction(rule, val, data, callback) {
+                  switch (true) {
+                    case val.length < 6:
+                      callback('用户名长度不正确');
+                      break;
+                    default:
+                      return true;}
+
+                } }] },
+
+
+
+            phone: {
+              rules: [{
+                required: true,
+                'errorMessage': '手机号不能为空' },
+
+              {
+                validateFunction: function validateFunction(rule, val, data, callback) {
+                  switch (true) {
+                    case !_this.telNumber.test(val):
+                      callback('手机号码格式不正确');
+                      break;
+                    default:
+                      return true;}
+
+                } }] },
+
+
+
+            vCode: {
+              rules: [{
+                required: true,
+                'errorMessage': '验证码不能为空' },
+
+              {
+                validateFunction: function validateFunction(rule, val, data, callback) {
+                  switch (true) {
+                    case val.length < 4:
+                      callback('验证码不正确');
+                      break;
+                    default:
+                      return true;}
+
+                } },
+              {
+                validateFunction: function validateFunction(rule, val, data, callback) {
+                  switch (true) {
+                    case val != _this.ruleCode:
+                      callback('验证码不正确');
+                      break;
+                    default:
+                      return true;}
+
+                } }] } } };
+
+
+
+
+
+      } });
+
+  } };exports.default = _default;
+
+/***/ }),
+
+/***/ 214:
+/*!***************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 215));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 216));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 217));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default };exports.default = _default;
+
+/***/ }),
+
+/***/ 215:
+/*!**************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \**************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
+
+/***/ }),
+
+/***/ 216:
+/*!*******************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \*******************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
+
+/***/ }),
+
+/***/ 217:
+/*!*******************************************************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \*******************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
+
+/***/ }),
+
+/***/ 22:
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/index.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 20));
+var _state = _interopRequireDefault(__webpack_require__(/*! ./state.js */ 23));
+var _mutations = _interopRequireDefault(__webpack_require__(/*! ./mutations.js */ 24));
+var _actions = _interopRequireDefault(__webpack_require__(/*! ./actions.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+_vue.default.use(_vuex.default);var _default =
+
+new _vuex.default.Store({
+  state: _state.default,
+  mutations: _mutations.default,
+  actions: _actions.default });exports.default = _default;
+
+/***/ }),
+
+/***/ 23:
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/state.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  userInfo: uni.getStorageSync('userInfo') || null,
+  historyList: uni.getStorageSync('historyList') || [],
+  labelList: uni.getStorageSync("labelList") || [] };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 232:
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-dateformat/components/uni-dateformat/date-format.js ***!
   \******************************************************************************************************************************************/
@@ -7117,135 +7283,52 @@ function friendlyDate(time, _ref)
 
 /***/ }),
 
-/***/ 21:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/common/userInfo/userInfo.js ***!
-  \**************************************************************************************************/
+/***/ 24:
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/mutations.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  install: function install(Vue) {
-    Vue.mixin({
-      data: function data() {var _this = this;
-        return {
-          telNumber: /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
-          userRules: {
-            loginName: {
-              rules: [{
-                required: true,
-                'errorMessage': "账户名不能为空" },
-
-              {
-                validateFunction: function validateFunction(rule, val, data, callback) {
-                  switch (true) {
-                    case val.length < 6:
-                      callback('用户名长度不正确');
-                      break;
-                    default:
-                      return true;}
-
-                } }
-              // 自定义验证规则
-              ] },
-
-            password: {
-              rules: [{
-                required: true,
-                'errorMessage': '密码不能为空' },
-
-              {
-                validateFunction: function validateFunction(rule, val, data, callback) {
-                  switch (true) {
-                    case val.length < 6:
-                      callback('用户名长度不正确');
-                      break;
-                    default:
-                      return true;}
-
-                } }] },
-
-
-
-            phone: {
-              rules: [{
-                required: true,
-                'errorMessage': '手机号不能为空' },
-
-              {
-                validateFunction: function validateFunction(rule, val, data, callback) {
-                  switch (true) {
-                    case !_this.telNumber.test(val):
-                      callback('手机号码格式不正确');
-                      break;
-                    default:
-                      return true;}
-
-                } }] },
-
-
-
-            vCode: {
-              rules: [{
-                required: true,
-                'errorMessage': '验证码不能为空' },
-
-              {
-                validateFunction: function validateFunction(rule, val, data, callback) {
-                  switch (true) {
-                    case val.length < 4:
-                      callback('验证码不正确');
-                      break;
-                    default:
-                      return true;}
-
-                } },
-              {
-                validateFunction: function validateFunction(rule, val, data, callback) {
-                  switch (true) {
-                    case val != _this.ruleCode:
-                      callback('验证码不正确');
-                      break;
-                    default:
-                      return true;}
-
-                } }] } } };
-
-
-
-
-
-      } });
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  upDataUserInfo: function upDataUserInfo(state, userInfo) {
+    uni.setStorageSync('userInfo', userInfo);
+    state.userInfo = userInfo;
+  },
+  upDataHistory: function upDataHistory(state, val) {
+    var list = state.historyList;
+    if (!list.includes(val)) {
+      list.unshift(val);
+      uni.setStorageSync('historyList', list);
+      state.historyList = list;
+    }
+  },
+  clearHistory: function clearHistory(state) {
+    uni.removeStorageSync('historyList');
+    state.historyList = [];
+  },
+  setLabelList: function setLabelList(state, val) {
+    uni.setStorageSync('labelList', val);
+    state.labelList = val;
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
-/***/ 22:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/index.js ***!
-  \*************************************************************************************/
+/***/ 25:
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/actions.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 20));
-var _state = _interopRequireDefault(__webpack_require__(/*! ./state.js */ 23));
-var _mutations = _interopRequireDefault(__webpack_require__(/*! ./mutations.js */ 24));
-var _actions = _interopRequireDefault(__webpack_require__(/*! ./actions.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-_vue.default.use(_vuex.default);var _default =
-
-new _vuex.default.Store({
-  state: _state.default,
-  mutations: _mutations.default,
-  actions: _actions.default });exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {};exports.default = _default;
 
 /***/ }),
 
-/***/ 223:
+/***/ 250:
 /*!**********************************************************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
   \**********************************************************************************************************************************************/
@@ -7385,67 +7468,6 @@ function createAnimation(option, _this) {
 
 /***/ }),
 
-/***/ 23:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/state.js ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  userInfo: uni.getStorageSync('userInfo') || null,
-  historyList: uni.getStorageSync('historyList') || [],
-  labelList: uni.getStorageSync("labelList") || [] };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 24:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/mutations.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  upDataUserInfo: function upDataUserInfo(state, userInfo) {
-    uni.setStorageSync('userInfo', userInfo);
-    state.userInfo = userInfo;
-  },
-  upDataHistory: function upDataHistory(state, val) {
-    var list = state.historyList;
-    if (!list.includes(val)) {
-      list.unshift(val);
-      uni.setStorageSync('historyList', list);
-      state.historyList = list;
-    }
-  },
-  clearHistory: function clearHistory(state) {
-    uni.removeStorageSync('historyList');
-    state.historyList = [];
-  },
-  setLabelList: function setLabelList(state, val) {
-    uni.setStorageSync('labelList', val);
-    state.labelList = val;
-  } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 25:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/store/actions.js ***!
-  \***************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {};exports.default = _default;
-
-/***/ }),
-
 /***/ 26:
 /*!********************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/router.js ***!
@@ -7462,11 +7484,10 @@ var _uniSimpleRouter = __webpack_require__(/*! uni-simple-router */ 27);
 var _index = _interopRequireDefault(__webpack_require__(/*! ./store/index.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 var router = (0, _uniSimpleRouter.createRouter)({
   platform: "mp-weixin",
-  routes: _toConsumableArray([{"path":"/pages/index/index","aliasPath":"/"},{"path":"/pages/follow/follow","name":"follow","meta":{"isLogin":true}},{"path":"/pages/self/self"},{"path":"/pages/search/search"},{"path":"/pages/setting/setting"},{"path":"/pages/login/login","name":"login"},{"path":"/pages/articleDetail/articleDetail"},{"path":"/pages/comments/comments"}]) });
+  routes: _toConsumableArray([{"path":"/pages/index/index","aliasPath":"/"},{"path":"/pages/follow/follow","name":"follow","meta":{"isLogin":true}},{"path":"/pages/self/self"},{"path":"/pages/search/search"},{"path":"/pages/setting/setting"},{"path":"/pages/login/login","name":"login"},{"path":"/pages/articleDetail/articleDetail"},{"path":"/pages/comments/comments"},{"path":"/pages/myArticle/myArticle","name":"myArticle","meta":{"isLogin":true}},{"path":"/pages/messageBack/messageBack","name":"messageBack","meta":{"isLogin":true}}]) });
 
 //全局路由前置守卫
 exports.router = router;router.beforeEach(function (to, from, next) {
-  console.log(_index.default.state);
   if (to.meta.isLogin && !_index.default.state.userInfo) {
     next({
       name: 'login',
@@ -13498,7 +13519,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -13519,14 +13540,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -13622,7 +13643,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"my_app","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -14086,11 +14107,23 @@ internalMixin(Vue);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/index/index", "style": { "navigationStyle": "custom" } }, { "path": "pages/follow/follow", "style": { "navigationBarTitleText": "我的关注", "enablePullDownRefresh": false }, "name": "follow", "meta": { "isLogin": true } }, { "path": "pages/self/self", "style": { "navigationBarTitleText": "关于我", "enablePullDownRefresh": false } }, { "path": "pages/search/search", "style": { "navigationStyle": "custom" } }, { "path": "pages/setting/setting", "style": { "navigationBarTitleText": "标签管理", "enablePullDownRefresh": false } }, { "path": "pages/login/login", "style": { "navigationBarTitleText": "注册登录", "enablePullDownRefresh": false }, "name": "login" }, { "path": "pages/articleDetail/articleDetail", "style": { "navigationBarTitleText": "文章详情页", "enablePullDownRefresh": false } }, { "path": "pages/comments/comments", "style": { "navigationBarTitleText": "评论列表", "enablePullDownRefresh": false } }], "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#f25037", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f25037", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/index/index", "iconPath": "static/img/home.png", "selectedIconPath": "static/img/home-active.png", "text": "首页" }, { "pagePath": "pages/follow/follow", "iconPath": "static/img/follow.png", "selectedIconPath": "static/img/follow-active.png", "text": "关注" }, { "pagePath": "pages/self/self", "iconPath": "static/img/my.png", "selectedIconPath": "static/img/my-active.png", "text": "我的" }] } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": [{ "path": "pages/index/index", "style": { "navigationStyle": "custom" } }, { "path": "pages/follow/follow", "style": { "navigationBarTitleText": "我的关注", "enablePullDownRefresh": false }, "name": "follow", "meta": { "isLogin": true } }, { "path": "pages/self/self", "style": { "navigationBarTitleText": "关于我", "enablePullDownRefresh": false } }, { "path": "pages/search/search", "style": { "navigationStyle": "custom" } }, { "path": "pages/setting/setting", "style": { "navigationBarTitleText": "标签管理", "enablePullDownRefresh": false } }, { "path": "pages/login/login", "style": { "navigationBarTitleText": "注册登录", "enablePullDownRefresh": false }, "name": "login" }, { "path": "pages/articleDetail/articleDetail", "style": { "navigationBarTitleText": "文章详情页", "enablePullDownRefresh": false } }, { "path": "pages/comments/comments", "style": { "navigationBarTitleText": "评论列表", "enablePullDownRefresh": false } }, { "path": "pages/myArticle/myArticle", "style": { "navigationBarTitleText": "我的文章", "enablePullDownRefresh": false }, "name": "myArticle", "meta": { "isLogin": true } }, { "path": "pages/messageBack/messageBack", "style": { "navigationBarTitleText": "意见反馈", "enablePullDownRefresh": false }, "name": "messageBack", "meta": { "isLogin": true } }], "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "moou", "navigationBarBackgroundColor": "#f25037", "backgroundColor": "#F8F8F8" }, "tabBar": { "color": "#666", "selectedColor": "#f25037", "backgroundColor": "#fff", "list": [{ "pagePath": "pages/index/index", "iconPath": "static/img/home.png", "selectedIconPath": "static/img/home-active.png", "text": "首页" }, { "pagePath": "pages/follow/follow", "iconPath": "static/img/follow.png", "selectedIconPath": "static/img/follow-active.png", "text": "关注" }, { "pagePath": "pages/self/self", "iconPath": "static/img/my.png", "selectedIconPath": "static/img/my-active.png", "text": "我的" }] } };exports.default = _default;
 
 /***/ }),
 
-/***/ 78:
+/***/ 8:
+/*!*************************************************************************************************!*\
+  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/pages.json?{"type":"stat"} ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__B39903B" };exports.default = _default;
+
+/***/ }),
+
+/***/ 82:
 /*!********************************************************************************************************!*\
   !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/node_modules/marked/lib/marked.js ***!
   \********************************************************************************************************/
@@ -16855,18 +16888,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   return marked_1;
 
 });
-
-/***/ }),
-
-/***/ 8:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator.DESKTOP-N1UA4L0/Downloads/my_app-master/pages.json?{"type":"stat"} ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__B39903B" };exports.default = _default;
 
 /***/ })
 

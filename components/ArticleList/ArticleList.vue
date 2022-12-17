@@ -3,7 +3,7 @@
 		<swiper class="swiper-list-content" @change="getCurrentPages" :current="activeIndex">
 			<swiper-item class="swiper-content" v-for="(item,index) in labelList" :key="item._id">
 				<view class="swiper-item">
-					<ListLitem :stateData="alreadyList[activeIndex]" @loadMoreArticle="getArticleMore"
+					<ListLitem :stateData="load" @loadMoreArticle="getArticleMore"
 						:articleList="articleListData[activeIndex]||[]">
 					</ListLitem>
 				</view>
@@ -34,7 +34,8 @@
 			return {
 				articleListData: {},
 				alreadyList: {},
-				pageSize: 6
+				pageSize: 6,
+				load: false
 			}
 		},
 		methods: {
@@ -68,7 +69,7 @@
 			},
 			getArticleMore() {
 				if (this.alreadyList[this.activeIndex].total === this.articleListData[this.activeIndex].length) {
-					this.alreadyList[this.activeIndex].loading = 'noMore'
+					this.load = true
 					this.$forceUpdate()
 					return
 				}

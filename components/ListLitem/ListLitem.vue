@@ -6,7 +6,7 @@
 					:key="item._id"></ListCard>
 			</view>
 			<uni-load-more v-if="isShowMore&&(articleList.length==0||articleList.length>7)"
-				:status="stateData.loading||'loading'">
+				:status="stateData?'noMore':'loading'">
 			</uni-load-more>
 		</scroll-view>
 	</view>
@@ -15,15 +15,16 @@
 <script>
 	export default {
 		name: "ListLitem",
+
 		props: {
 			articleList: Array,
 			stateData: {
-				type: Object,
-				default: () => {
-					return {
-						loading: 'loading'
-					}
-				}
+				type: Boolean,
+				// default: () => {
+				// 	return {
+				// 		loading: 'loading'
+				// 	}
+				// }
 			},
 			isShowMore: {
 				type: Boolean,
