@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "list-litem": "/components/ListLitem/ListLitem"
+  },
+  "component": true
+}

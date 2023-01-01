@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "uni-dateformat": "/uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat",
+    "comment-list": "/components/commentList/commentList"
+  },
+  "component": true
+}

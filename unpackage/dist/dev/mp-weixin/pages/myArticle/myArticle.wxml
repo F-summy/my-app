@@ -1,0 +1,1 @@
+<view class="my-article-list"><block wx:for="{{myArticleList}}" wx:for-item="item" wx:for-index="__i0__" wx:key="_id"><block wx:if="{{myArticleList.length}}"><list-card vue-id="{{'323b0a6a-1-'+__i0__}}" item="{{item}}" bind:__l="__l"></list-card></block><block wx:else><view class="no-data">暂无收藏的文章</view></block></block></view>
